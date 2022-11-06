@@ -11,12 +11,10 @@ class ChitterRepo
       chitter.id = record['id']
       chitter.peep = record['peep']
       chitter.time_logged = record['time_logged']
-     
+      
       peeps << chitter
      
     end 
-    
-    p peeps
     return peeps
   end
  
@@ -25,25 +23,19 @@ class ChitterRepo
     params = [id]
     result_set = DatabaseConnection.exec_params(sql, params)
 
-     record = result_set[0]
+    record = result_set[0]
     
     chitter = Chitter.new
     chitter.id = record['id']
     chitter.peep = record['peep']
     chitter.time_logged = record['time_logged']
-
     return chitter
   end  
   
   def create(chitter)
-      # excutes SQL query;
     sql =  'INSERT INTO chitter_test (peep, time_logged) VALUES($1, $2);'
-    
     sql_params = [chitter.peep, chitter.time_logged]
-
     DatabaseConnection.exec_params(sql, sql_params)
-
     return nil
   end 
- 
 end  
