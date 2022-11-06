@@ -25,7 +25,7 @@ RSpec.describe ChitterRepo do
    repo = ChitterRepo.new
    chitter = repo.find(1)
    expect(chitter.peep).to eq('another peep')
-   expect(chitter.time_logged).to eq('23.08')
+   expect(chitter.time_logged).to eq("23.08")
   end 
 
 
@@ -35,7 +35,7 @@ RSpec.describe ChitterRepo do
     chitter = Chitter.new 
     chitter.peep = 'Hey there!'
     chitter.time_logged = 23.15
-    repo.create(chitter) 
+    repo.create(chitter) # => ni
     chitter = repo.all
     last_chitter = chitter.last
     expect(last_chitter.peep).to eq 'Hey there!'

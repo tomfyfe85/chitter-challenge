@@ -11,8 +11,7 @@ class ChitterRepo
       chitter.id = record['id']
       chitter.peep = record['peep']
       chitter.time_logged = record['time_logged']
-      
-      peeps << chitter
+     peeps << chitter
      
     end 
     return peeps

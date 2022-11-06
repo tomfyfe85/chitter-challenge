@@ -1,6 +1,10 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
 require_relative 'lib/database_connection'
+require_relative 'lib/chitter_repo'
+
+DatabaseConnection.connect
+
 
 class Application < Sinatra::Base
   # This allows the app code to refresh
@@ -8,16 +12,23 @@ class Application < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
   end
-end
+ 
+  get '/peeps' do 
+    repo = ChitterRepo.new
+    @peep_list = repo.all
+    return erb(:all)
+  end 
 
-# We need to give the database name to the method `connect`.
-DatabaseConnection.connect('chitter')
+  get '/html' do
+    @peep = params[:peep]
+    return erb(:index)
+  end
+  
+  get '/' do 
+    peep = params[:peep]
+    return "Hi, #{peep}!!!?"
+  end
+end 
 
-# Perform a SQL query on the database and get the result set.
-sql = 'SELECT id, peep, time_logged FROM chitter;'
-result = DatabaseConnection.exec_params(sql, [])
 
-# Print out each record from the result set .
-result.each do |record|
-  p record
-end
+
