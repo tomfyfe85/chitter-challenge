@@ -1,7 +1,19 @@
 <html>
-  <head></head>
+  <head>CHIITER</head>
   <body>
-    
-    <h1>Hi, <%= @peep %>!</h1>
+    <h1>Hi, <%= @peep %> welcome to chitter!</h1>
+    <div>
+    <h1> Recent peeps: </h1>
+    </div>
+    <div>
+    <% @peep_list.each do |words| %>
+     <p>
+      Peep content:
+      <%= words.peep %><br>
+      Time logged:<%= words.time_logged %>
+    </p>
+    <% end %>
+    </div>
+    <a href="/signup">click to here to sign up</a>
   </body>
 </html>

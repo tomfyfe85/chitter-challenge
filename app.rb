@@ -1,7 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
 require_relative 'lib/database_connection'
-require_relative 'lib/chitter_repo'
+require_relative 'lib/PeepsRepository'
 
 DatabaseConnection.connect
 
@@ -13,20 +13,15 @@ class Application < Sinatra::Base
     register Sinatra::Reloader
   end
  
-  get '/peeps' do 
-    repo = ChitterRepo.new
-    @peep_list = repo.all
-    return erb(:all)
+  get '/signup' do 
+   return erb(:all)
   end 
 
-  get '/html' do
+  get '/' do
+    repo = ChitterRepo.new
+    @peep_list = repo.all
     @peep = params[:peep]
     return erb(:index)
-  end
-  
-  get '/' do 
-    peep = params[:peep]
-    return "Hi, #{peep}!!!?"
   end
 end 
 
